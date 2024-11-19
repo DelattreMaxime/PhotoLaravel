@@ -11,10 +11,10 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
 
     function index (){
-        return view («index»);
+        return view ('index');
     }
 
     function albums (){
-        return view («albums»);
+        return view ('albums');
     }
 }

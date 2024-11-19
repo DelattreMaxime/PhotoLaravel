@@ -11,9 +11,7 @@
 
 	<body>
 	<nav>
-        <a href= "{{route('index')}}">home page </a>
-
-
+        <a href= "{{route('accueil')}}">home page </a>
 </nav>
 <main>
     @yield ('contenu')
