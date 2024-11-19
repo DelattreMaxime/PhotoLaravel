@@ -13,7 +13,7 @@
 </head>
 <body style="background-image: url('{{ $lastPhoto->url ?? 'default_background.jpg' }}'); background-size: cover;">
     <nav>
-        <a href="{{ route('index') }}">Albums</a>
+        <a href="{{ route('accueil') }}">Albums</a>
     </nav>
     <h1>Bienvenue sur le gestionnaire d'albums photo</h1>
 </body>
