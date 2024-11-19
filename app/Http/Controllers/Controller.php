@@ -9,12 +9,4 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
-
-    function index (){
-        return view ('index');
-    }
-
-    function albums (){
-        return view ('albums');
-    }
 }
