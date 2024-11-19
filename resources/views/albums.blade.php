@@ -1,8 +1,8 @@
 @extends ("layout")
 @section ("contenu")
 <ul>
-    @foreach ($films as $films)
-    <li> <a href ="{{route("detailFilm", ['id'=> $album ->id])}}"> {{$album -> titre}} </li>
+    @foreach ($albums as $albums)
+    <li> <a href ="{{route("photosAlbum", ['id'=> $album ->id])}}"> {{$album -> titre}} </li>
     @endforeach
 </ul>
 
