@@ -1,0 +1,33 @@
+/* Styles de la navigation */
+.navbar {
+    background-color: #f4f4f4; /* Gris clair */
+    padding: 1rem;
+    display: flex;
+    justify-content: center; /* Centre horizontalement les liens */
+    gap: 1.5rem; /* Espace entre les liens */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre pour l'effet */
+}
+
+.nav-link {
+    text-decoration: none; /* Supprime le soulignement */
+    color: #333; /* Texte noir/gris foncé */
+    font-family: 'Montserrat Alternates', sans-serif; /* Votre police */
+    font-size: 1.2rem; /* Taille du texte */
+    transition: color 0.3s ease; /* Animation fluide */
+}
+
+.nav-link:hover {
+    color: #d9534f; /* Rouge sur hover */
+}
+
+/* Corps principal */
+body {
+    margin: 0;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+main {
+    padding: 2rem;
+    font-size: 1rem;
+    color: #333;
+}
