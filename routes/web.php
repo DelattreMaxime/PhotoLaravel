@@ -11,6 +11,8 @@ Route::get('/albums', [AlbumController::class, 'albums'])->name('albums');
 
 Route::get('/photosAlbum/{id}', [AlbumController::class, 'photosAlbum'])->name('photosAlbum');
 
+Route::get('/photos/search', [PhotoController::class, 'search'])->name('photos.search');
+
 
 
 
