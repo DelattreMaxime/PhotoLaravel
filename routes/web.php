@@ -6,10 +6,25 @@ use App\Http\Controllers\PhotoController;
 Route::get('/', [PhotoController::class, 'index'])->name('accueil');
 
 // Routes pour les albums
-Route::get('/albums', [AlbumController::class, 'index'])->name('index');
+Route::get('/albums', [AlbumController::class, 'albums'])->name('albums');
 
 
-Route::get('/albums', [AlbumController::class, 'index']); // Lister tous les albums
+Route::get('/photosAlbum/{id}', [AlbumController::class, 'photosAlbum'])->name('photosAlbum');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('/albums/create', [AlbumController::class, 'create']); // Formulaire création
 Route::post('/albums', [AlbumController::class, 'store']); // Ajouter un album
 Route::get('/albums/{id}', [AlbumController::class, 'show']); // Détails d'un album

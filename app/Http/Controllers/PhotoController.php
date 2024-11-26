@@ -11,8 +11,4 @@ class PhotoController extends Controller
     function index (){
         return view ('index');
     }
-
-    function albums (){
-        return view ('albums');
-    }
 }

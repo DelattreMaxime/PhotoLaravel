@@ -12,6 +12,7 @@
 	<body>
 	<nav>
         <a href= "{{route('accueil')}}">home page </a>
+        <a href= "{{route('albums')}}">albums </a>
 </nav>
 <main>
     @yield ('contenu')
