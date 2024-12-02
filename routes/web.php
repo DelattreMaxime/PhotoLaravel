@@ -17,6 +17,16 @@ Route::get('/search', [PhotoController::class, 'search'])->name('photos.search')
 Route::get('/photos/searchByTag', [PhotoController::class, 'searchByTag'])->name('photos.searchByTag');
 
 
+// Route pour afficher le formulaire d'ajout de photo
+Route::get('/albums/{album}/photos/create', [PhotoController::class, 'create'])->name('photos.create');
+
+// Route pour enregistrer une nouvelle photo dans un album
+Route::post('/albums/{album}/photos', [PhotoController::class, 'store'])->name('photos.store');
+
+// Route pour supprimer une photo d'un album
+Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->name('photos.destroy');
+
+
 
 
 

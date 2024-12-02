@@ -2,17 +2,32 @@
 
 @section("contenu")
     <h1>{{$album->titre}}</h1>
+
+    <!-- Lien pour trier les photos -->
     <a href="?ordre=titre">Trier par titre</a>
+
+    <!-- Bouton pour ajouter une photo -->
+    <a href="{{ route('photos.create', $album->id) }}">
+        <button>Ajouter une photo</button>
+    </a>
+
     <div id="album">
         @foreach ($photos as $photo)
             <div class="photos default">
-                <span>{{$photo->titre}}</span>
-                <img src="{{$photo->url}}" alt="$photo->titre" id="photo{{$photo->id}}" class="small" onclick="enlargeImg()">
-
+                <span>{{ $photo->titre }}</span>
+                <img src="{{ $photo->url }}" alt="{{ $photo->titre }}" id="photo{{$photo->id}}" class="small" onclick="enlargeImg()">
+                
+                <!-- Formulaire pour supprimer une photo -->
+                <form action="{{ route('photos.destroy', $photo->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette photo ?')">Supprimer</button>
+                </form>
             </div>
         @endforeach
         <div id="overlay"></div>
     </div>
+
 
 
 <!-- script to set display property -->
