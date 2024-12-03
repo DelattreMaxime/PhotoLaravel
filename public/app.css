@@ -45,10 +45,8 @@ main {
     margin-bottom: 5px;
 }
 
-.photos img {
+.photosImg {
     width: 100%;
-    cursor: pointer;
-    transition: transform 0.25s ease;
 }
 
 #overlay {
@@ -80,4 +78,22 @@ button {
 
 button:hover {
     background-color: #444;
+}
+
+#modal {
+    position:fixed;
+    width: 80%;
+    height: 80%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#modal img {
+    width: 90%;
+}
+
+#modal #fermer {
+    position: absolute;
+    margin: 25vh;
 }

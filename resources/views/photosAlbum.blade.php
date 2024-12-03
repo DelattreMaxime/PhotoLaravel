@@ -21,7 +21,7 @@
         @foreach ($photos as $photo)
             <div class="photos default">
                 <span>{{ $photo->titre }}</span>
-                <img src="{{ $photo->url }}" alt="{{ $photo->titre }}" id="photo{{$photo->id}}" class="small" onclick="enlargeImg()">
+                <img src="{{ $photo->url }}" alt="{{ $photo->titre }}" id="photo{{$photo->id}}" class="photosImg">
                 
                 <!-- Formulaire pour supprimer une photo -->
                 <form action="{{ route('photos.destroy', $photo->id) }}" method="POST" style="display: inline;">
@@ -31,30 +31,38 @@
                 </form>
             </div>
         @endforeach
+
         <div id="overlay"></div>
     </div>
+
+
+    <div id="modal">
+    <img src="">
+    <button id="fermer">fermer</button>
+    </div>
+
+
 
 
 
 
 <!-- script to set display property -->
 <script>
-img = document.getElementById("photo{{$photo->id}}");
+let p = document.querySelectorAll (".photosImg")
+for (let maPhoto of p)
+maPhoto.addEventListener ('click', function (e){
+    console.log(e.currentTarget.src)
+    console.log(document.querySelector('#modal img'))
+    document.querySelector('#modal img').src = e.currentTarget.src    
+    document.getElementById ("modal").style.display = "block"
+})
 
-function enlargeImg() {
-   img.style.transform = "scale(1.5)";
-   img.style.transition = "transform 0.25s ease";
-}
+let monBouton= document.querySelector('#modal button')
+monBouton.addEventListener('click', function () {
+document.getElementById ("modal").style.display = "none"
+})
 
-// Function to reset image size
-function resetImg() {
-   img.style.transform = "scale(1)";
-   img.style.transition = "transform 0.25s ease";
-}
 </script>
-
-<button onclick="resetImg()">fermer</button>
-</div>
 
 </body>
 @endsection
