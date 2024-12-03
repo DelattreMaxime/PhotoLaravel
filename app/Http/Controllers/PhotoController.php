@@ -78,19 +78,26 @@ class PhotoController extends Controller
 
     // Méthode pour afficher les photos d'un album avec tri
     public function show($albumId, Request $request)
-    {
-        $album = DB::table('albums')->where('id', $albumId)->first();
+{
+    $album = DB::table('albums')->where('id', $albumId)->first();
 
-        // Récupérer le critère de tri depuis la requête, ou 'titre' par défaut
-        $ordre = $request->input('ordre', 'titre'); // 'titre' par défaut
+    // Liste des critères de tri autorisés
+    $criteresValides = ['titre', 'note'];
 
-        // Récupérer les photos de l'album et trier selon le critère choisi
-        $photos = DB::table('photos')
-            ->where('album_id', $albumId)
-            ->orderBy($ordre, 'asc') // Trie les photos par titre ou note
-            ->get();
+    // Récupérer le critère de tri, ou 'titre' par défaut
+    $ordre = $request->input('ordre', 'titre');
 
-        // Passer l'album et les photos triées à la vue
-        return view('photosAlbum', ['album' => $album, 'photos' => $photos]);
+    if (!in_array($ordre, $criteresValides)) {
+        $ordre = 'titre'; // Défaut si le critère n'est pas valide
     }
+
+    // Récupérer les photos de l'album et trier selon le critère choisi
+    $photos = DB::table('photos')
+        ->where('album_id', $albumId)
+        ->orderBy($ordre, 'asc') // Trie les photos par titre ou note
+        ->get();
+
+    return view('photosAlbum', ['album' => $album, 'photos' => $photos]);
+}
+
 }

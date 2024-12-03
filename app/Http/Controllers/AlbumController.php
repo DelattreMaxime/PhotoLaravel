@@ -23,29 +23,24 @@ class AlbumController extends Controller
     }
 
         public function index(Request $request)
-    {
-        // Récupérer le paramètre de tri
-        $sort = $request->input('sort', 'title'); // Par défaut, trier par titre
+        {
+            // Récupérer le paramètre de tri (par défaut : 'title')
+            $sort = $request->input('creation', 'title'); 
 
-        if ($sort === 'date') {
-            // Tri par date de création
-            $albums = DB::table('albums')
-                ->leftJoin('photos', 'albums.id', '=', 'photos.album_id')
-                ->select('albums.*', DB::raw('MAX(photos.created_at) as last_photo_date'))
-                ->groupBy('albums.id')
-                ->orderBy('last_photo_date', 'desc')
-                ->get();
-        } else {
-            // Tri par titre
-            $albums = DB::table('albums')
-                ->leftJoin('photos', 'albums.id', '=', 'photos.album_id')
-                ->select('albums.*', DB::raw('MAX(photos.created_at) as last_photo_date'))
-                ->groupBy('albums.id')
-                ->orderBy('albums.titre', 'asc')
-                ->get();
+            // Préparer la requête SQL selon le critère de tri
+            if ($sort === 'date_asc') {
+                // Tri par date de création (ancien → récent)
+                $albums = DB::select('SELECT * FROM albums ORDER BY creation ASC');
+                
+            } elseif ($sort === 'date_desc') {
+                // Tri par date de création (récent → ancien)
+                $albums = DB::select('SELECT * FROM albums ORDER BY creation DESC');
+            } else {
+                // Tri par titre (A → Z, par défaut)
+                $albums = DB::select('SELECT * FROM albums ORDER BY titre ASC');
+            }
+
+            // Retourner la vue avec les albums triés
+            return view('albums', compact('albums', 'sort'));
         }
-
-        return view('albums.index', compact('albums'));
-    }
-
 }
