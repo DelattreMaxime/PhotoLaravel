@@ -39,14 +39,14 @@ class PhotoController extends Controller
         return view('photos.create', ['albumId' => $albumId]);
     }
     
-        public function store(Request $request, $albumId)
+    public function store(Request $request, $albumId)
     {
         $request->validate([
             'titre' => 'required|string|max:255',
             'url' => 'nullable|url', // URL de la photo
-            'file' => 'nullable|image|max:2048', // Pour l'upload d'images
+            'file' => 'nullable|image', // Pour l'upload d'images
         ]);
-
+       
         // Si l'upload de fichier est effectué
         if ($request->hasFile('file')) {
             $path = $request->file('file')->store('photos', 'public');
@@ -54,20 +54,21 @@ class PhotoController extends Controller
         } else {
             $url = $request->input('url'); // URL de la photo
         }
+       
 
+       
         // Insertion de la photo dans la base de données
         DB::table('photos')->insert([
-            'titre' => $request->input('title'),
+            'titre' => $request->input('titre'), // Assurez-vous que le nom de l'input est bien 'titre'
             'url' => $url,
             'album_id' => $albumId, // L'ID de l'album
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
+      
 
-        return redirect()->route('albums.show', $albumId)->with('success', 'Photo ajoutée avec succès.');
+        return redirect()->route('photosAlbum', $albumId)->with('success', 'Photo ajoutée avec succès.');
     }
 
-        public function destroy($photoId)
+    public function destroy($photoId)
     {
         // Suppression de la photo de la base de données
         DB::table('photos')->where('id', $photoId)->delete();
@@ -75,6 +76,21 @@ class PhotoController extends Controller
         return back()->with('success', 'Photo supprimée avec succès.');
     }
 
+    // Méthode pour afficher les photos d'un album avec tri
+    public function show($albumId, Request $request)
+    {
+        $album = DB::table('albums')->where('id', $albumId)->first();
 
+        // Récupérer le critère de tri depuis la requête, ou 'titre' par défaut
+        $ordre = $request->input('ordre', 'titre'); // 'titre' par défaut
 
+        // Récupérer les photos de l'album et trier selon le critère choisi
+        $photos = DB::table('photos')
+            ->where('album_id', $albumId)
+            ->orderBy($ordre, 'asc') // Trie les photos par titre ou note
+            ->get();
+
+        // Passer l'album et les photos triées à la vue
+        return view('photosAlbum', ['album' => $album, 'photos' => $photos]);
+    }
 }

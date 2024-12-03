@@ -21,4 +21,31 @@ class AlbumController extends Controller
         $photos = DB::select('SELECT * FROM photos WHERE photos.album_id = ?', [$id]);
         return view('photosAlbum', data: compact('album', 'photos'));
     }
+
+        public function index(Request $request)
+    {
+        // Récupérer le paramètre de tri
+        $sort = $request->input('sort', 'title'); // Par défaut, trier par titre
+
+        if ($sort === 'date') {
+            // Tri par date de création
+            $albums = DB::table('albums')
+                ->leftJoin('photos', 'albums.id', '=', 'photos.album_id')
+                ->select('albums.*', DB::raw('MAX(photos.created_at) as last_photo_date'))
+                ->groupBy('albums.id')
+                ->orderBy('last_photo_date', 'desc')
+                ->get();
+        } else {
+            // Tri par titre
+            $albums = DB::table('albums')
+                ->leftJoin('photos', 'albums.id', '=', 'photos.album_id')
+                ->select('albums.*', DB::raw('MAX(photos.created_at) as last_photo_date'))
+                ->groupBy('albums.id')
+                ->orderBy('albums.titre', 'asc')
+                ->get();
+        }
+
+        return view('albums.index', compact('albums'));
+    }
+
 }

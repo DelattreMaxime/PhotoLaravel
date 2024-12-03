@@ -4,7 +4,13 @@
     <h1>{{$album->titre}}</h1>
 
     <!-- Lien pour trier les photos -->
-    <a href="?ordre=titre">Trier par titre</a>
+    <form method="GET" action="{{ route('photosAlbum', ['id' => $album->id]) }}">
+        <label for="ordre">Trier par :</label>
+        <select name="ordre" id="ordre" onchange="this.form.submit()">
+            <option value="titre" {{ request('ordre') == 'titre' ? 'selected' : '' }}>Titre</option>
+            <option value="note" {{ request('ordre') == 'note' ? 'selected' : '' }}>Note</option>
+        </select>
+    </form>
 
     <!-- Bouton pour ajouter une photo -->
     <a href="{{ route('photos.create', $album->id) }}">
@@ -27,6 +33,7 @@
         @endforeach
         <div id="overlay"></div>
     </div>
+
 
 
 
