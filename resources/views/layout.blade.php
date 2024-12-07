@@ -6,17 +6,21 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app.css')}}" />
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-animation"></div>
-        <a href="{{ route('accueil') }}" class="nav-link nav-home">Home Page</a>
-        <a href="{{ route('albums') }}" class="nav-link nav-albums">Albums</a>
-        <form action="{{ route('photos.search') }}" method="GET">
-    <input type="text" name="query" placeholder="Rechercher des photos">
-    <button type="submit">Rechercher</button>
-</form>
+    
 
+    <nav>
+            <ul class="nav-links">
+                <li><a href="{{ route('accueil') }}">Accueil</a></li>
+                <li><a href="{{ route('albums') }}">Albums</a></li>
+            </ul>
+            <div class="search-bar">
+                <form action="{{ route('photos.search') }}" method="GET">
+                    <input type="text" name="query" placeholder="Rechercher..." />
+                    <button type="submit">Rechercher</button>
+                </form>
+            </div>
+        </nav>
 
-    </nav>
     <main>
         @yield('contenu')
     </main>
