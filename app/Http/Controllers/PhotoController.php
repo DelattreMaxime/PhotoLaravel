@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Photo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB; // Import de DB
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PhotoController extends Controller
 {
@@ -101,17 +102,33 @@ class PhotoController extends Controller
     }
 
     public function updateNote(Request $request, $id)
-    {
-        $request->validate([
-            'note' => 'nullable|numeric|min:0|max:5',
-        ]);
-    
-        DB::table('photos')
-            ->where('id', $id)
-            ->update(['note' => $request->input('note')]);
-    
-        return redirect()->back()->with('success', 'Note mise à jour avec succès.');
+{
+    $validated = $request->validate([
+        'note' => 'required|numeric|min:1|max:5',
+    ]);
+
+    Log::info('Note reçue : ' . $validated['note'] . ' pour la photo ID : ' . $id);
+
+    $photo = DB::table('photos')->where('id', $id)->first();
+    if (!$photo) {
+        Log::error('Photo introuvable pour ID : ' . $id);
+        return redirect()->back()->with('error', 'Photo introuvable.');
     }
+
+    if ($photo->note == $validated['note']) {
+        Log::info('Note déjà à jour pour la photo ID : ' . $id);
+        return redirect()->back()->with('info', 'La note est déjà à jour.');
+    }
+
+    DB::table('photos')
+        ->where('id', $id)
+        ->update(['note' => $validated['note']]);
+
+    Log::info('Note mise à jour avec succès pour la photo ID : ' . $id);
+
+    return redirect()->back()->with('success', 'Note mise à jour avec succès.');
+}
+
     
 
 }

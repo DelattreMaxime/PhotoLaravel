@@ -26,25 +26,17 @@
                 <span style="font-size: 1rem; font-weight: bold; padding: 10px; display: block; text-align: center;">{{ $photo->titre }}</span>
                 <img src="{{ $photo->url }}" alt="{{ $photo->titre }}" id="photo{{ $photo->id }}" class="photosImg">
 
-                <!-- Affichage et modification de la note avec étoiles -->
+                <!-- Affichage et modification de la note -->
                 <div style="text-align: center; margin-top: 10px;">
                     <p><strong>Note actuelle :</strong> {{ $photo->note ?? 'Non notée' }}</p>
                     <form action="{{ route('photos.updateNote', $photo->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('POST')
-
-                        <!-- Système de notation par étoiles -->
-                        <div class="star-rating">
-                            @for ($i = 1; $i <= 5; $i++)
-                                <input type="radio" id="star{{ $i }}-{{ $photo->id }}" name="note" value="{{ $i }}" 
-                                    {{ $photo->note == $i ? 'checked' : '' }}>
-                                <label for="star{{ $i }}-{{ $photo->id }}" title="{{ $i }} étoiles">&#9733;</label>
-                            @endfor
-                        </div>
-
+                        <input type="number" name="note" value="{{ $photo->note }}" min="0" max="5" step="1" 
+                            style="width: 60px; padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                         <button type="submit" 
-                            style="padding: 5px 10px; background-color: rgb(255, 215, 34); color: black; border: none; border-radius: 4px; cursor: pointer;">
-                            Enregistrer
+                            style="padding: 5px 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                            Modifier
                         </button>
                     </form>
                 </div>
@@ -62,7 +54,7 @@
         @endforeach
     </div>
 
-<!-- Modal pour affichage plein écran -->
+    <!-- Modal pour affichage plein écran -->
 <div id="modal">
     <div class="modal-content">
         <img src="">
