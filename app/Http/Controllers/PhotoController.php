@@ -59,9 +59,9 @@ class PhotoController extends Controller
        
         // Insertion de la photo dans la base de données
         DB::table('photos')->insert([
-            'titre' => $request->input('titre'), // Assurez-vous que le nom de l'input est bien 'titre'
+            'titre' => $request->input('titre'), 
             'url' => $url,
-            'album_id' => $albumId, // L'ID de l'album
+            'album_id' => $albumId, 
         ]);
       
 
@@ -77,27 +77,41 @@ class PhotoController extends Controller
     }
 
     // Méthode pour afficher les photos d'un album avec tri
-    public function show($albumId, Request $request)
-{
-    $album = DB::table('albums')->where('id', $albumId)->first();
+        public function show($albumId, Request $request)
+    {
+        $album = DB::table('albums')->where('id', $albumId)->first();
 
-    // Liste des critères de tri autorisés
-    $criteresValides = ['titre', 'note'];
+        // Liste des critères de tri autorisés
+        $criteresValides = ['titre', 'note'];
 
-    // Récupérer le critère de tri, ou 'titre' par défaut
-    $ordre = $request->input('ordre', 'titre');
+        // Récupérer le critère de tri, ou 'titre' par défaut
+        $ordre = $request->input('ordre', 'titre');
 
-    if (!in_array($ordre, $criteresValides)) {
-        $ordre = 'titre'; // Défaut si le critère n'est pas valide
+        if (!in_array($ordre, $criteresValides)) {
+            $ordre = 'titre'; // Défaut si le critère n'est pas valide
+        }
+
+        // Récupérer les photos de l'album et trier selon le critère choisi
+        $photos = DB::table('photos')
+            ->where('album_id', $albumId)
+            ->orderBy($ordre, 'asc') // Trie les photos par titre ou note
+            ->get();
+
+        return view('photosAlbum', ['album' => $album, 'photos' => $photos]);
     }
 
-    // Récupérer les photos de l'album et trier selon le critère choisi
-    $photos = DB::table('photos')
-        ->where('album_id', $albumId)
-        ->orderBy($ordre, 'asc') // Trie les photos par titre ou note
-        ->get();
-
-    return view('photosAlbum', ['album' => $album, 'photos' => $photos]);
-}
+    public function updateNote(Request $request, $id)
+    {
+        $request->validate([
+            'note' => 'nullable|numeric|min:0|max:5',
+        ]);
+    
+        DB::table('photos')
+            ->where('id', $id)
+            ->update(['note' => $request->input('note')]);
+    
+        return redirect()->back()->with('success', 'Note mise à jour avec succès.');
+    }
+    
 
 }

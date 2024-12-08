@@ -26,9 +26,8 @@ Route::post('/albums/{album}/photos', [PhotoController::class, 'store'])->name('
 // Route pour supprimer une photo d'un album
 Route::delete('/photos/{photo}', [PhotoController::class, 'destroy'])->name('photos.destroy');
 
-
-
-
+// maj note
+Route::post('/photos/{id}/update-note', [PhotoController::class, 'updateNote'])->name('photos.updateNote');
 
 
 

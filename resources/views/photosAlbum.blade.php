@@ -25,7 +25,30 @@
             <div class="photos">
                 <span style="font-size: 1rem; font-weight: bold; padding: 10px; display: block; text-align: center;">{{ $photo->titre }}</span>
                 <img src="{{ $photo->url }}" alt="{{ $photo->titre }}" id="photo{{ $photo->id }}" class="photosImg">
-                
+
+                <!-- Affichage et modification de la note avec étoiles -->
+                <div style="text-align: center; margin-top: 10px;">
+                    <p><strong>Note actuelle :</strong> {{ $photo->note ?? 'Non notée' }}</p>
+                    <form action="{{ route('photos.updateNote', $photo->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('POST')
+
+                        <!-- Système de notation par étoiles -->
+                        <div class="star-rating">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <input type="radio" id="star{{ $i }}-{{ $photo->id }}" name="note" value="{{ $i }}" 
+                                    {{ $photo->note == $i ? 'checked' : '' }}>
+                                <label for="star{{ $i }}-{{ $photo->id }}" title="{{ $i }} étoiles">&#9733;</label>
+                            @endfor
+                        </div>
+
+                        <button type="submit" 
+                            style="padding: 5px 10px; background-color: rgb(255, 215, 34); color: black; border: none; border-radius: 4px; cursor: pointer;">
+                            Enregistrer
+                        </button>
+                    </form>
+                </div>
+
                 <!-- Formulaire pour supprimer une photo -->
                 <form action="{{ route('photos.destroy', $photo->id) }}" method="POST" style="text-align: center; margin-top: 10px;">
                     @csrf
@@ -39,30 +62,42 @@
         @endforeach
     </div>
 
-    <!-- Modal pour affichage plein écran -->
-    <div id="modal">
+<!-- Modal pour affichage plein écran -->
+<div id="modal">
+    <div class="modal-content">
         <img src="">
-        <button id="fermer" style="position: absolute; top: 20px; right: 20px; background-color: rgba(255, 255, 255, 0.8); color: #333; border: none; padding: 10px 15px; border-radius: 50%; cursor: pointer;">
-            Fermer
-        </button>
+        <button id="fermer">Fermer</button>
     </div>
+</div>
 
-    <!-- Overlay -->
-    <div id="overlay"></div>
+<!-- Overlay -->
+<div id="overlay"></div>
+
+
+
 
     <!-- Script pour gérer l'affichage du modal -->
     <script>
-        let photos = document.querySelectorAll(".photosImg");
-        for (let photo of photos) {
-            photo.addEventListener("click", function (e) {
-                document.querySelector("#modal img").src = e.currentTarget.src;
-                document.getElementById("modal").style.display = "block";
-            });
-        }
+        // Gérer le zoom des images
+            let photos = document.querySelectorAll(".photosImg");
+            for (let photo of photos) {
+                photo.addEventListener("click", function (e) {
+                    // Charger l'image dans le modal
+                    document.querySelector("#modal img").src = e.currentTarget.src;
+                    
+                    // Afficher le modal et l'overlay
+                    document.getElementById("modal").style.display = "flex";  // Utiliser flex pour centrer
+                    document.getElementById("overlay").style.display = "block";  // Afficher l'overlay
+                });
+            }
 
-        let closeButton = document.querySelector('#modal button');
-        closeButton.addEventListener('click', function () {
-            document.getElementById("modal").style.display = "none";
-        });
+            // Fermer le modal
+            let closeButton = document.querySelector('#modal button');
+            closeButton.addEventListener('click', function () {
+                // Cacher le modal et l'overlay
+                document.getElementById("modal").style.display = "none";
+                document.getElementById("overlay").style.display = "none";  // Cacher l'overlay
+            });
+
     </script>
 @endsection
