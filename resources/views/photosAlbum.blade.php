@@ -90,6 +90,5 @@
                 document.getElementById("modal").style.display = "none";
                 document.getElementById("overlay").style.display = "none";  // Cacher l'overlay
             });
-
     </script>
 @endsection
