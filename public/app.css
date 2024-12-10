@@ -1,7 +1,23 @@
+
+
+
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Montserrat;
     margin: 0;
     padding: 0;
+}
+
+input {
+    font-family: Montserrat;
+}
+
+button {
+    font-family: Montserrat;
+}
+
+select {
+    font-family: Montserrat;
 }
 
 /* nav */
@@ -69,6 +85,7 @@ nav .search-bar button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    
 }
 
 nav .search-bar button:hover {

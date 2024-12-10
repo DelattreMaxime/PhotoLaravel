@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section("contenu")
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
     <h1 style="text-align: center; margin-bottom: 20px;">{{ $album->titre }}</h1>
 
     <!-- Formulaire de tri -->
@@ -15,7 +17,7 @@
     <!-- Bouton pour ajouter une photo -->
     <div style="text-align: center; margin-bottom: 20px;">
         <a href="{{ route('photos.create', $album->id) }}">
-            <button style="padding: 10px 20px; background-color: #333; color: white; border: none; border-radius: 4px; cursor: pointer;">Ajouter une photo</button>
+            <button style="padding: 10px 20px; background-color: #333; color: white; border: none; border-radius: 4px; cursor: pointer;"><i class='bx bx-plus'></i> Ajouter une photo</button>
         </a>
     </div>
 
@@ -44,10 +46,10 @@
                 <!-- Formulaire pour supprimer une photo -->
                 <form action="{{ route('photos.destroy', $photo->id) }}" method="POST" style="text-align: center; margin-top: 10px;">
                     @csrf
-                    @method('DELETE')
+                    @method('DELETE') 
                     <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette photo ?')" 
                         style="padding: 8px 12px; background-color: #ff4d4d; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                        Supprimer
+                        <i class='bx bx-x'></i>
                     </button>
                 </form>
             </div>

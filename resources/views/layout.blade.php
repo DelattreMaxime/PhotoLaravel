@@ -4,6 +4,8 @@
     <meta charset='UTF-8'>
     <title>Titre de la page</title>
     <link rel="stylesheet" type="text/css" href="{{asset('app.css')}}" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
 </head>
 <body>
     
