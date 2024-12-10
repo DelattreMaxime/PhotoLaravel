@@ -12,6 +12,7 @@
 
     <nav>
             <ul class="nav-links">
+                <li><img src="{{asset('logo/MMI ARCHIVEicon.png')}}"></li>
                 <li><a href="{{ route('accueil') }}">Accueil</a></li>
                 <li><a href="{{ route('albums') }}">Albums</a></li>
             </ul>
