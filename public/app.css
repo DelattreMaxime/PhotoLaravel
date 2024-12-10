@@ -33,10 +33,14 @@ nav {
     border-bottom: 2px solid rgba(30, 30, 39, 0.126);
 }
 
+.logonav {
+    width: 40px;
+}
+
 nav ul {
     list-style: none;
     display: flex;
-    margin: 0;
+
     padding: 0;
 }
 
@@ -59,7 +63,7 @@ nav ul li a:hover {
     color: #000;
 }
 
-/* varre de recherche */
+/* barre de recherche */
 nav .search-bar {
     display: flex;
     align-items: center;
@@ -92,6 +96,24 @@ nav .search-bar button {
 
 nav .search-bar button:hover {
     background-color: #555; /* Bouton gris intermédiaire */
+}
+
+.bienvenue {
+    padding: 80px;
+}
+
+
+.texteaccueil {
+    padding: 30px;
+    width: 500px;
+    text-align: center;
+    margin-left: 130px;
+}
+.homelogo {
+    width: 50%;
+    margin-top: 50px;
+    margin-left: 150px;
+    
 }
 
 
