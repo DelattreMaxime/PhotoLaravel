@@ -14,7 +14,9 @@ input {
 
 button {
     font-family: Montserrat;
+
 }
+
 
 select {
     font-family: Montserrat;
@@ -219,13 +221,6 @@ nav .search-bar button:hover {
     max-height: 90%;
 }
 
-button {
-    padding: 5px 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
 
 button:hover {
     background-color: #444;
