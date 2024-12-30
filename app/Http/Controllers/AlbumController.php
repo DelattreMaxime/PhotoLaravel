@@ -43,4 +43,8 @@ class AlbumController extends Controller
             // Retourner la vue avec les albums triés
             return view('albums', compact('albums', 'sort'));
         }
+
+        function about() {
+            return view('about');
+        }
 }

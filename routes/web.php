@@ -6,7 +6,7 @@ use App\Http\Controllers\PhotoController;
 Route::get('/', [PhotoController::class, 'index'])->name('accueil');
 
 // Routes pour les albums
-Route::get('/albums', [AlbumController::class, 'index'])->name('albums');
+Route::get('/albums', action: [AlbumController::class, 'index'])->name('albums');
 
 
 Route::get('/photosAlbum/{id}', [PhotoController::class, 'show'])->name('photosAlbum');
@@ -32,6 +32,7 @@ Route::post('/photos/{id}/update-note', [PhotoController::class, 'updateNote'])-
 
 
 
+Route::get('/about', action: [AlbumController::class, 'about'])->name('about');
 
 
 

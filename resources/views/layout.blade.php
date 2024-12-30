@@ -11,21 +11,28 @@
     
 
     <nav>
+        <a href="{{ route('accueil') }}"><img class= logonav src="{{asset('logo/MMI ARCHIVEicon.png')}}"></a>
+        <div id="navv">
             <ul class="nav-links">
-                <li><img class= logonav src="{{asset('logo/MMI ARCHIVEicon.png')}}"></li>
-                <li><a href="{{ route('accueil') }}">Accueil</a></li>
                 <li><a href="{{ route('albums') }}">Albums</a></li>
+                <li><a href="{{ route('about') }}">À propos</a></li>
             </ul>
+
             <div class="search-bar">
                 <form action="{{ route('photos.search') }}" method="GET">
                     <input type="text" name="query" placeholder="Rechercher..." />
                     <button type="submit">Rechercher</button>
                 </form>
             </div>
+        </div>
         </nav>
 
     <main>
         @yield('contenu')
     </main>
+
+    <footer>
+        <p><b>Delattre Maxime</b> et <b>Chekalova Anna</b></p>
+    </footer>
 </body>
 </html>

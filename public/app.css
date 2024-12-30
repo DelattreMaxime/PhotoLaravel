@@ -6,6 +6,9 @@ body {
     font-family: Montserrat;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 input {
@@ -28,19 +31,24 @@ nav {
     padding: 15px 5%;
     margin-bottom: 2.5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid rgba(30, 30, 39, 0.126);
 }
+#navv {
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+}
 
 .logonav {
-    width: 40px;
+    width: 50px;
+    padding-right: 1.5rem;
 }
+
 
 nav ul {
     list-style: none;
     display: flex;
-
     padding: 0;
 }
 
@@ -55,6 +63,7 @@ nav ul li a {
     font-size: 1rem;
     padding: 8px 12px;
     border-radius: 4px;
+    align-items: center;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -69,8 +78,8 @@ nav .search-bar {
     align-items: center;
 }
 
-nav .search-bar input[type="text"] {
-    width: 200px;
+.search-bar input[type="text"] {
+    width: 300px;
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -78,11 +87,11 @@ nav .search-bar input[type="text"] {
     transition: box-shadow 0.3s ease;
 }
 
-nav .search-bar input[type="text"]:focus {
+ .search-bar input[type="text"]:focus {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-nav .search-bar button {
+.search-bar button {
     margin-left: 10px;
     padding: 8px 12px;
     border: none;
@@ -94,7 +103,7 @@ nav .search-bar button {
     
 }
 
-nav .search-bar button:hover {
+.search-bar button:hover {
     background-color: #555; /* Bouton gris intermédiaire */
 }
 
@@ -102,20 +111,33 @@ nav .search-bar button:hover {
     padding: 80px;
 }
 
-
 .texteaccueil {
     padding: 30px;
-    width: 500px;
+    width: 800px;
     text-align: center;
-    margin-left: 130px;
+    line-height: 1.8rem;
 }
 .homelogo {
     width: 50%;
-    margin-top: 50px;
-    margin-left: 150px;
-    
+
 }
 
+.About-accueil {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Search-accueil {
+    height: 30vh;
+    background-color: rgba(40, 40, 40, 0.042);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 /* Conteneur principal pour les albums */
 #album {
@@ -390,4 +412,20 @@ button:hover {
 .star-rating label:hover,
 .star-rating label:hover ~ label {
     color: rgb(255, 215, 34);
+}
+
+footer {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    position: relative;
+    background-color: #33333300; 
+    color: #333; 
+    height: 5rem; 
+    width: 100%;
+    border-top: 2px solid #3333331b;
+}
+
+footer {
+    margin-top: auto; 
 }
